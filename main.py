@@ -1,21 +1,18 @@
-import uuid
 import os
 import re
 import shutil
 import cv2
-import socket
-import sys
 import unidecode
 import zxingcpp
 import tkinter as tk
 from tkinter import filedialog, ttk, messagebox
 from PIL import Image, ImageTk
-import dotenv
+import datetime
 from slugify import slugify
 from database import delete_qr_code, get_qr_codes
 from database import get_qr_codes, delete_table,connect_db,get_total_qr_codes,get_all_tables
 from excel_import import extract_images_from_excel
-from check_pc_id import get_windows_uuid
+from check_pc_id import get_windows_uuid,get_machine_guid
 
 
 tk_root = tk.Tk()
@@ -498,13 +495,19 @@ def show_alert_window():
     """Показывает окно предупреждения"""
     messagebox.askokcancel("❌ Доступ запрещён!","Вы не являетесь авторизованным пользователем!\nПриложение будет закрыто.")
     tk_root.quit()
-com1 = "34444335-3633-3434-5453-533436334435"
-com2 = "33E663D7-5963-BDEF-0A7B-3860778E2490"
-me = "03000200-0400-0500-0006-000700080009"
     
-if get_windows_uuid() == me:
+com = "ba66148c-7495-4532-ba93-ea740d538dd1"
+me = "22a895c8-47c6-45de-8340-72ec4bdb97a9"
+
+def check_year_and_notify():
+    current_year = datetime.datetime.now().year
+    if current_year != 2025:
+        messagebox.showwarning("Предупреждение", "Пожалуйста, обновите приложение!")
+        tk_root.quit()
+
+if get_machine_guid() == com:
+    check_year_and_notify()
     load_existing_tables()
     tk_root.mainloop()
-
 else:
     show_alert_window()
