@@ -505,7 +505,7 @@ def check_year_and_notify():
         messagebox.showwarning("Предупреждение", "Пожалуйста, обновите приложение!")
         tk_root.quit()
 
-if get_machine_guid() == com:
+if get_machine_guid() == me:
     check_year_and_notify()
     load_existing_tables()
     tk_root.mainloop()

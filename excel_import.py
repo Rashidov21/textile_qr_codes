@@ -30,8 +30,8 @@ def extract_images_from_excel(file_path,tk_root):
         for idx, image in enumerate(ws._images):
             img_data = image._data()
             img = Image.open(BytesIO(img_data))
-
-            if img.size[0] == 166:
+            # print(img.size[0],img.size[1],img.mode)
+            if img.size[0] > 100:
                 if img.mode == "CMYK":
                     img = img.convert("RGB")
 

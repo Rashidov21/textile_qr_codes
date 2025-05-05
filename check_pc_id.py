@@ -21,4 +21,4 @@ def get_machine_guid():
     except Exception as e:
         return f"Ошибка: {e}"
 
-print("Machine GUID:", get_machine_guid())
+# print("Machine GUID:", get_machine_guid())
